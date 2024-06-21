@@ -1,0 +1,18 @@
+http:
+  routers:
+    my-router:
+      rule: "Host(`example.com`)"
+      service: my-service
+      middlewares:
+        - bearerToken
+
+  middlewares:
+    bearerToken:
+      plugin:
+        bearerTokenPlugin: {}
+
+  services:
+    my-service:
+      loadBalancer:
+        servers:
+          - url: "http://example.com"

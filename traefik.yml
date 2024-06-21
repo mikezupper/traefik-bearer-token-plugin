@@ -1,0 +1,15 @@
+entryPoints:
+  web:
+    address: ":80"
+  metrics:
+    address: ":8080"
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+
+experimental:
+  plugins:
+    bearerTokenPlugin:
+      moduleName: "github.com/mikezupper/traefik-bearer-token-plugin"
+      version: "v0.1.0"
