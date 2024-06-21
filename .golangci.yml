@@ -25,10 +25,17 @@ linters-settings:
       - FIXME
   gofumpt:
     extra-rules: true
+  depguard:
+    list-type: blacklist
+    packages:
+      - github.com/prometheus/client_golang/prometheus
+    allow-list:
+      - main.go
 
 linters:
   enable-all: true
   disable:
+    - depguard
     - deadcode # deprecated
     - exhaustivestruct # deprecated
     - golint # deprecated

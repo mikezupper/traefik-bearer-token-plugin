@@ -3,15 +3,16 @@ package traefikbearertokenplugin
 
 import (
 	"context"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"strings"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 // Config the plugin configuration.
 type Config struct {
-	//Headers map[string]string `json:"headers,omitempty"`
+	// Headers map[string]string `json:"headers,omitempty"`
 }
 
 // CreateConfig creates the default plugin configuration.
@@ -28,8 +29,7 @@ type BearerTokenMiddleware struct {
 }
 
 // New created BearerTokenMiddleware plugin.
-func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
-
+func New(_ context.Context, next http.Handler, _ *Config, _ string) (http.Handler, error) {
 	prometheusHandler := promhttp.Handler()
 	http.Handle("/metrics", prometheusHandler)
 
