@@ -1,4 +1,4 @@
-// Package traefik_bearer_token_plugin plugin.
+// Package traefikbearertokenplugin plugin.
 package traefikbearertokenplugin
 
 import (
