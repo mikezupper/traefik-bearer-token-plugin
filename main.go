@@ -1,5 +1,5 @@
-// Package traefikbearertokenplugin plugin.
-package traefikbearertokenplugin
+// Package traefik_bearer_token_plugin plugin.
+package traefik_bearer_token_plugin
 
 import (
 	"context"
