@@ -1,0 +1,33 @@
+name: Build Traefik Bearer Token Plugin
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18  # Use the Go version you need
+
+      - name: Build the plugin
+        run: |
+          go build -o traefik-bearer-token-plugin
+          # Add any additional build steps here
+
+      - name: Archive the build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: traefik-bearer-token-plugin
+          path: traefik-bearer-token-plugin
