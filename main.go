@@ -1,4 +1,4 @@
-package main
+package traefik_bearer_token_plugin
 
 import (
 	"context"
