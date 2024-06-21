@@ -1,27 +1,38 @@
-package traefik_bearer_token_plugin
+// Package traefik_bearer_token_plugin plugin.
+package traefikbearertokenplugin
 
 import (
 	"context"
-	"net/http"
-	"strings"
-
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"net/http"
+	"strings"
 )
 
+// Config the plugin configuration.
 type Config struct {
+	//Headers map[string]string `json:"headers,omitempty"`
 }
 
+// CreateConfig creates the default plugin configuration.
 func CreateConfig() *Config {
-	return &Config{}
+	return &Config{
+		//	Headers: make(map[string]string),
+	}
 }
 
+// BearerTokenMiddleware plugin.
 type BearerTokenMiddleware struct {
 	next   http.Handler
 	metric *prometheus.CounterVec
 }
 
+// New created BearerTokenMiddleware plugin.
 func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
+
+	prometheusHandler := promhttp.Handler()
+	http.Handle("/metrics", prometheusHandler)
+
 	metric := prometheus.NewCounterVec(
 		prometheus.CounterOpts{
 			Name: "traefik_bearer_token_requests_total",
@@ -48,9 +59,4 @@ func (bt *BearerTokenMiddleware) ServeHTTP(rw http.ResponseWriter, req *http.Req
 	bt.metric.WithLabelValues(endpoint, token).Inc()
 
 	bt.next.ServeHTTP(rw, req)
-}
-
-func init() {
-	prometheusHandler := promhttp.Handler()
-	http.Handle("/metrics", prometheusHandler)
 }
