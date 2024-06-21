@@ -1,0 +1,12 @@
+displayName: Traefik Bearer Token Plugin
+type: middleware
+#iconPath: .assets/icon.png
+
+import: github.com/mikezupper/traefik-bearer-token-plugin
+
+summary: '[traefik-bearer-token-plugin] create a prometheus bucket for Authorization and path'
+
+testData:
+  Headers:
+    X-Demo: test
+    X-URL: '{{URL}}'
