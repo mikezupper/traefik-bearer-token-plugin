@@ -1,4 +1,4 @@
-.PHONY: lint test traefik_bearer_token_plugin clean
+.PHONY: lint test vendor clean
 
 export GO111MODULE=on
 
@@ -14,7 +14,7 @@ yaegi_test:
 	yaegi test -v .
 
 vendor:
-	go mod traefik_bearer_token_plugin
+	go mod vendor
 
 clean:
-	rm -rf ./traefik_bearer_token_plugin
+	rm -rf ./vendor
